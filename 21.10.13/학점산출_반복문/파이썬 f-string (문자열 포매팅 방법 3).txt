@@ -1,0 +1,2 @@
+파이썬 f-string (문자열 포매팅 방법 3)
+https://blockdmask.tistory.com/429
