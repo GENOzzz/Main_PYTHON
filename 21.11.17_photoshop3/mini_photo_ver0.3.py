@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter.filedialog import *
 from tkinter.simpledialog import *
+from tkinter.colorchooser import*
 from wand.image import *
 from wand.drawing import Drawing
 from wand.image import Image
@@ -405,29 +406,12 @@ def func_text():
     newY=photo2.height
     displayImage(photo2,newX,newY)
 
-
-###검정펜###
-def func_blackpen() :
+    
+##펜버튼 클릭시 호출되는 클릭펜함수##
+def func_clickpen(event):
     global pencolor
-    pencolor="black"
-    canvas.bind("<B1-Motion>",paint)
-
-###빨간펜###
-def func_redpen() :
-    global pencolor
-    pencolor="red"
-    canvas.bind("<B1-Motion>",paint)
-
-###파란펜###
-def func_bluepen() :
-    global pencolor
-    pencolor="blue"
-    canvas.bind("<B1-Motion>",paint)
-
-###노란펜###
-def func_yellowpen() :
-    global pencolor
-    pencolor="yellow"
+    value = askcolor()#("색상","빨강:1 파랑:2 노랑:3 검정:4",minvalue=1,maxvalue=4)
+    pencolor=value[1]
     canvas.bind("<B1-Motion>",paint)
 
 ##펜색을 받아 그림을 그리는 함수##
@@ -436,18 +420,6 @@ def paint(event):
     x1,y1=event.x-1,event.y-1
     x2,y2=event.x+1,event.y+1
     canvas.create_oval(x1,y1,x2,y2,fill=pencolor,outline=pencolor)
-    
-##펜버튼 클릭시 호출되는 클릭펜함수##
-def func_clickpen(event):
-    value=askinteger("색상","빨강:1 파랑:2 노랑:3 검정:4",minvalue=1,maxvalue=4)
-    if value==1:
-        func_redpen() ##넘어오는 value에 따라 색상구별
-    elif value==2:
-        func_bluepen()
-    elif value==3:
-        func_yellowpen()
-    elif value==4:
-        func_blackpen()
 
     
 ###메인코드부분
